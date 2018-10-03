@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Equals and GetHashCode</Title>
+      <Shortcut>MySnippet_EqualsAndGetHashCode</Shortcut>
+      <Description>Code snippet to implement Equals() and GetHasCode() according the .NET giudelines.</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    
+    public override bool Equals( Object obj )
+		{
+			// If parameter is null return false
+			if ( obj == null )
+			{
+				return false;
+			}
+
+			// If parameter cannot be cast to Point return false
+			VarianceGroup varianceGroup = obj as VarianceGroup;
+			if ( (Object) varianceGroup == null )
+			{
+				return false;
+			}
+
+			// Return true if the fields match
+			return ( ID == varianceGroup.ID ) && ( FriendlyName == varianceGroup.FriendlyName ) && ( aPrioriScalar == varianceGroup.aPrioriScalar );
+		}
+
+		public bool Equals( VarianceGroup varianceGroup )
+		{
+			// If parameter is null return false
+			if ( (object) varianceGroup == null )
+			{
+				return false;
+			}
+
+			// Return true if the fields match
+			return ( ID == varianceGroup.ID ) && ( FriendlyName == varianceGroup.FriendlyName ) && ( aPrioriScalar == varianceGroup.aPrioriScalar );
+		}
+
+		public override int GetHashCode()
+		{
+			unchecked
+			{
+				int hash = 17;
+				hash = hash * 23 + ID.GetHashCode();
+				hash = hash * 23 + FriendlyName.GetHashCode();
+				hash = hash * 23 + aPrioriScalar.GetHashCode();
+				return hash;
+			}
+		}
+		
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>debug+CallStack</Title>
+      <Shortcut>debug+CallStack</Shortcut>
+      <Description>Code snippet which writes data to a file.</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    #region Debug 
+    // using System.Diagnostics;
+		// using System.Reflection;
+		StackTrace callStack = new StackTrace();
+		StackFrame frame = callStack.GetFrame( 1 );
+		MethodBase method = frame.GetMethod();
+
+		string declaringType = method.DeclaringType.Name;
+		string methodName = method.Name;
+		bool IsPrivate = method.IsPrivate;
+		bool IsPublic = method.IsPublic;
+		bool IsStatic = method.IsStatic;
+		bool IsVirtual = method.IsVirtual;
+		string memberType = method.MemberType.ToString();
+
+		string methodAccessType = string.Empty;
+
+    #region Method Access
+		if ( IsPrivate )
+			methodAccessType = "Private";
+		if ( IsPublic )
+			methodAccessType = "Public";
+		if ( IsStatic )
+			methodAccessType = "Static";
+		if ( IsVirtual )
+			methodAccessType = "Virtual";
+    #endregion
+    
+		Debug.WriteLine( "\tMethod: " + methodName.ToString() + " (" + declaringType.ToString() + ")" );
+		Debug.WriteLine( "\tType: " + memberType.ToString() + " (" + methodAccessType.ToString() + ")" );
+    
+    #endregion
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

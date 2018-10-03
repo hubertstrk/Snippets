@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Write to file</Title>
+      <Shortcut>MySnippet_WriteToFile</Shortcut>
+      <Description>Code snippet which writes data to a file.</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    
+    string line = string.Empty;
+    line += "Hello World!";
+
+	using ( FileStream fs = new FileStream( "C:/temp/test.txt",
+			FileMode.Append, FileAccess.Write, FileShare.ReadWrite ))
+			{
+				using ( StreamWriter swFromFile = new StreamWriter( fs ))
+				{
+					swFromFile.WriteLine( line );
+					swFromFile.Flush();
+					swFromFile.Close();
+				}
+			}
+		
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

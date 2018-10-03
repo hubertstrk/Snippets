@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Retry Pattern</Title>
+      <Shortcut>Retry</Shortcut>
+      <Description>Somple class which performs a retry of the defined action in case of an exception</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    
+          public class CommandRetry<T>
+  {
+    public void Try( Action<T, T> action, T in1, T in2, int maxRetries )
+    {
+      int numTries = 0;
+      bool succeeded = false;
+      while ( numTries < maxRetries )
+      {
+        try
+        {
+          action( in1, in2 );
+          succeeded = true;
+        }
+        catch ( Exception ex )
+        {
+          Trace.WriteLine( "Exception caught. Retry: " + numTries );
+          if ( numTries == maxRetries )
+            throw ex;
+
+          numTries++;
+          succeeded = false;
+        }
+        
+        if ( succeeded )
+        {
+          Trace.WriteLine( "Succeeded. # Retries: " + numTries );
+          return;
+        }
+      }
+    }
+
+    public void TryWithDelay( Action<T, T> action, T in1, T in2, int maxRetries, int delayMilliseconds )
+    {
+      int numTries = 0;
+      bool succeeded = false;
+      while ( numTries < maxRetries )
+      {
+        try
+        {
+          action( in1, in2 );
+          succeeded = true;
+        }
+        catch ( Exception ex )
+        {
+          Trace.WriteLine( "Exception caught. Retry: " + numTries );
+          if ( numTries == maxRetries )
+            throw ex;
+
+          numTries++;
+          succeeded = false;
+        }
+
+        if ( succeeded )
+        {
+          Trace.WriteLine( "Succeeded. # Retries: " + numTries );
+          return;
+        }
+        Thread.Sleep( delayMilliseconds );
+      }
+    }
+  }
+		
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

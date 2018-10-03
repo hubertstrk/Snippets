@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Convert seconds in current day in hours, minutes and seconds</Title>
+      <Shortcut>Convert seconds in current day</Shortcut>
+      <Description>Code snippet which converts the seconds in the current day to hours, minutes and seconds</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+			uint hours_rest = secondsOfDay % ( 60 * 60 );
+			uint fullHours = ( secondsOfDay - hours_rest ) / ( 60 * 60 );
+			// minutes
+			uint minutes_rest = hours_rest % 60;
+			uint fullMinutes = ( hours_rest - minutes_rest ) % 60;
+			// seconds
+			uint tk_seconds = minutes_rest / 60;
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

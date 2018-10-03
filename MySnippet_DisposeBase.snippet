@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Dispose Pattern Base Class</Title>
+      <Shortcut>MySnippet_DisposeBase</Shortcut>
+      <Description>Dispose Pattern base class</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    		private bool _IsDisposed = false;
+
+		/// <summary>
+		/// Implementation of Dispose according to .NET Framework Design Guidelines.
+		/// </summary>
+		/// <remarks>Do not make this method virtual.
+		/// A derived class should not be able to override this method.
+		/// </remarks>
+		public void Dispose()
+		{
+			Dispose( true );
+			// Take object off the Finalization queue 
+			// to prevent finalization code for this object
+			// from executing a second time.
+			GC.SuppressFinalize( this );
+		}
+
+		/// <summary>
+		/// Implementation of Dispose according to .NET Framework Design Guidelines.
+		/// </summary>
+		/// <param name="disposing"></param>
+		/// <remarks>
+		/// <para><list type="bulleted">Dispose(bool isDisposing) executes in two distinct scenarios.
+		/// <item>If <paramref name="isDisposing"/> equals true, the method has been called directly
+		/// or indirectly by a user's code. Managed and unmanaged resources
+		/// can be disposed.</item>
+		/// <item>If <paramref name="disposing"/> equals false, the method has been called by the 
+		/// runtime from inside the finalizer and you should not reference 
+		/// other objects. Only unmanaged resources can be disposed.</item></list></para>
+		/// </remarks>
+		protected virtual void Dispose( bool disposing )
+		{
+			if ( !_IsDisposed )
+			{
+				if ( disposing )
+				{
+					// release managed resources
+					if ( _DB != null )
+					{
+						_DB.Dispose();
+						_DB = null;
+					}
+				}
+
+				// release unmanaged resources. If disposing is false, 
+				// only the following code is executed
+			}
+
+			_IsDisposed = true;
+		}
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

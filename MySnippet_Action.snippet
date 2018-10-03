@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Action</Title>
+      <Shortcut>MySnippet_Action</Shortcut>
+      <Description>Action delegate.</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    
+Action<int> display = delegate(int intValue)
+            {
+                Console.WriteLine(intValue.ToString("X"));
+            };
+
+			display(16);            
+		
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Dispose Pattern Derived Class</Title>
+      <Shortcut>MySnippet_DisposeDerived</Shortcut>
+      <Description>Dispose Pattern derived class</Description>
+      <Author>Hubert Stärk</Author>
+    </Header>
+    <Snippet>
+      <Code Language="CSharp">
+        <![CDATA[
+    		 private bool disposed = false;
+			/// <summary>
+			/// Implementation of Dispose according to .NET Framework Design Guidelines.
+			/// </summary>
+			/// <param name="disposing"></param>
+			/// <remarks>
+			/// <para><list type="bulleted">Dispose(bool disposing) executes in two distinct scenarios.
+			/// <item>If <paramref name="isDisposing"/> equals true, the method has been called directly
+			/// or indirectly by a user's code. Managed and unmanaged resources
+			/// can be disposed.</item>
+			/// <item>If <paramref name="disposing"/> equals false, the method has been called by the 
+			/// runtime from inside the finalizer and you should not reference 
+			/// other objects. Only unmanaged resources can be disposed.</item></list></para>
+			/// </remarks>
+			protected override void Dispose(bool disposing)
+			{
+				if (!disposed)
+				{
+					if (disposing)
+					{
+						// Release managed resources.
+					}
+					// Release unmanaged resources.
+					// Set large fields to null.
+				   // Call Dispose on your base class.
+					disposed = true;
+				}
+				base.Dispose(disposing);
+			}
+			// The derived class does not have a Finalize method
+			// or a Dispose method without parameters because it inherits
+			// them from the base class.
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
+
