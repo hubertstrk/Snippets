@@ -10,7 +10,7 @@
     <Snippet>
       <Code Language="CSharp">
         <![CDATA[
-    
+
           public class CommandRetry<T>
   {
     public void Try( Action<T, T> action, T in1, T in2, int maxRetries )
@@ -33,7 +33,7 @@
           numTries++;
           succeeded = false;
         }
-        
+
         if ( succeeded )
         {
           Trace.WriteLine( "Succeeded. # Retries: " + numTries );
@@ -71,8 +71,27 @@
         Thread.Sleep( delayMilliseconds );
       }
     }
+
+    public async Task<T> TryWithDelay(Func<Task<T>> action, int maxRetries, int delayMilliseconds)
+    {
+        int numTries = 0;
+        while (numTries < maxRetries)
+        {
+            try
+            {
+                return await action();
+            }
+            catch (Exception)
+            {
+                numTries++;
+            }
+            Thread.Sleep(delayMilliseconds);
+        }
+
+        return default(T);
+    }
   }
-		
+
 ]]>
       </Code>
     </Snippet>
